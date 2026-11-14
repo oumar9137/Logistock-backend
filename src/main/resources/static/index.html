@@ -1,55 +1,68 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>LogiStock - Bamako</title>
-
-        <link rel="manifest" href="/manifest.json">
-        <meta name="theme-color" content="#1a73e8">
-        <link rel="icon" href="/icon-512.png">
-    <style>
-        body{font-family:Arial;background:#f4f6f8;padding:0;margin:0}
-        .card{background:white;padding:20px;border-radius:10px;max-width:1100px;margin:20px auto}
-        h1{color:#1a73e8}
-        .total{background:#e8f5e9;padding:15px;border-radius:8px;font-weight:bold;text-align:center;font-size:18px}
-        input,select{padding:10px;margin:5px;width:95%;border:1px solid #ccc;border-radius:5px}
-        button{padding:10px 20px;background:#1a73e8;color:white;border:none;border-radius:5px;cursor:pointer}
-        .btn-del{background:#ff3b30;padding:6px 12px}
-        .btn-edit{background:#ff9500;padding:6px 12px;margin-right:5px}
-        .btn-print{background:#059669;padding:6px 12px;margin-left:5px}
-        table{width:100%;margin-top:20px;border-collapse:collapse}
-        th,td{padding:10px;border-bottom:1px solid #ddd;text-align:left}
-        .faible{color:red;font-weight:bold}
-        .ok{color:green}
-        .search{background:#fff3cd;border:1px solid #ffcc00}
-        #loginBox{background:#e3f2fd;padding:20px;border-radius:10px;margin-bottom:20px}
-        .vente-box{background:#f0fdf4;padding:20px;border-radius:10px;margin-top:20px;border:2px solid #22c55e}
-        #recuImpression{display:none}
-        .layout{display:flex;gap:15px;align-items:flex-start}
-        .sidebar{width:220px;min-width:220px;background:#1e293b;border-radius:10px;padding:15px;position:sticky;top:15px}
-        .sidebar h3{color:white;margin:0 0 15px 0;font-size:16px;text-align:center}
-        .sidebar button{display:block;width:100%;text-align:left;margin-bottom:8px;background:#334155;padding:12px;border-radius:8px;font-size:14px}
-        .sidebar button:hover{background:#1a73e8}
-        .sidebar button.active{background:#1a73e8;font-weight:bold}
-        .sidebar .logout-btn{background:#ef4444;margin-top:20px}
-        .contenu{flex:1;min-width:0}
-        .page{display:none}
-        .page.active{display:block}
-        @media print{
-            body *{visibility:hidden}
-            #recuImpression, #recuImpression *{visibility:visible}
-            #recuImpression{display:block !important;position:absolute;left:0;top:0;width:100%;padding:20px;font-family:Arial}
-        }
-    </style>
+<meta charset="UTF-8">
+<title>LogiStock - Bamako</title>
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0a0a0a">
+<link rel="icon" href="/icon-512.png">
+<style>
+*{box-sizing:border-box}
+body{font-family:'Segoe UI',Arial;background:#0a0a0a;color:#eee;padding:0;margin:0}
+.card{background:#111;padding:0;border-radius:0;max-width:1250px;margin:0 auto;min-height:100vh}
+.topbar{background:linear-gradient(90deg,#000,#1a1a1a);padding:18px 25px;display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #d4af37;position:sticky;top:0;z-index:10}
+.topbar h1{color:#d4af37;margin:0;font-size:22px;letter-spacing:1px}
+.topbar span{color:#aaa;font-size:13px}
+h1{color:#d4af37} h2{color:#fff} h3{color:#d4af37}
+.total{background:linear-gradient(135deg,#d4af37,#f5d76e);color:#000;padding:18px;border-radius:12px;font-weight:800;text-align:center;font-size:19px}
+input,select{padding:12px;margin:5px;width:95%;border:1px solid #333;border-radius:8px;background:#1e1e1e;color:#fff;outline:none}
+input:focus,select:focus{border-color:#d4af37}
+button{padding:11px 20px;background:linear-gradient(135deg,#d4af37,#b8860b);color:#000;border:none;border-radius:8px;cursor:pointer;font-weight:700}
+button:hover{opacity:.9}
+.btn-del{background:#ef4444;color:#fff;padding:6px 12px}.btn-edit{background:#d4af37;color:#000;padding:6px 12px;margin-right:5px}.btn-print{background:#059669;color:#fff;padding:6px 12px;margin-left:5px}
+table{width:100%;margin-top:15px;border-collapse:collapse;background:#1a1a1a;border-radius:10px;overflow:hidden}
+th{background:#d4af37;color:#000;padding:12px;text-align:left} td{padding:11px;border-bottom:1px solid #2a2a2a}
+.faible{color:#ff6b6b;font-weight:bold}.ok{color:#4ade80}
+.search{background:#1e1e1e;border:1px solid #d4af37;color:#fff}
+#loginBox{background:#1a1a1a;padding:30px;border-radius:15px;margin:40px auto;max-width:450px;border:1px solid #d4af37;text-align:center}
+.vente-box{background:#1a1a1a;padding:20px;border-radius:12px;margin-top:10px;border:1px solid #2a2a2a}
+#recuImpression{display:none}
+.layout{display:flex;gap:15px;align-items:flex-start;padding:20px}
+.sidebar{width:230px;min-width:230px;background:#161616;border:1px solid #2a2a2a;border-radius:14px;padding:15px;position:sticky;top:85px}
+.sidebar h3{color:#d4af37;margin:0 0 15px 0;font-size:16px;text-align:center}
+.sidebar button{display:block;width:100%;text-align:left;margin-bottom:8px;background:#222;padding:13px;border-radius:10px;font-size:14px;color:#eee;border:1px solid transparent}
+.sidebar button:hover{border-color:#d4af37;color:#d4af37}
+.sidebar button.active{background:#d4af37;color:#000;font-weight:800}
+.sidebar .logout-btn{background:#7f1d1d;color:#fff;margin-top:20px}
+.contenu{flex:1;min-width:0}
+.page{display:none}.page.active{display:block}
+/* NOUVEAU DASHBOARD */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:15px}
+.kpi{background:#1a1a1a;border:1px solid #2a2a2a;border-left:4px solid #d4af37;padding:16px;border-radius:12px;text-align:left}
+.kpi b{font-size:24px;color:#fff;display:block}.kpi span{font-size:13px;color:#aaa}.kpi small{color:#4ade80;font-weight:700}
+.dash-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:14px;margin-top:14px}
+.dash-card{background:#1a1a1a;border:1px solid #2a2a2a;border-radius:14px;padding:18px}
+.dash-card h3{margin:0 0 12px 0}
+.bar-row{display:flex;align-items:center;gap:10px;margin:9px 0;font-size:14px}
+.bar-row span:first-child{width:140px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar{flex:1;background:#2a2a2a;height:10px;border-radius:20px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,#d4af37,#f59e0b);border-radius:20px}
+.badge{background:#d4af37;color:#000;padding:2px 8px;border-radius:20px;font-size:12px;font-weight:800}
+.vente-item{background:#222;padding:10px;border-radius:10px;margin-bottom:8px;display:flex;justify-content:space-between;font-size:14px}
+@media(max-width:800px){.layout{flex-direction:column}.sidebar{width:100%;position:static}.kpi-grid{grid-template-columns:1fr 1fr}.dash-grid{grid-template-columns:1fr}}
+@media print{body *{visibility:hidden}#recuImpression,#recuImpression *{visibility:visible}#recuImpression{display:block !important;position:absolute;left:0;top:0;width:100%;padding:20px;font-family:Arial;color:#000;background:#fff}}
+</style>
 </head>
 <body>
 <div class="card">
-    <h1>📦 LogiStock - Bamako</h1>
+<div class="topbar"><h1>💎 LogiStock - Bamako</h1><span>Gestion Intelligente • Noir & Or</span></div>
+<div style="padding:0 20px">
     <div id="loginBox">
-        <h3>🔐 Connexion</h3>
+        <h3 style="font-size:22px">🔐 Connexion</h3>
+        <p style="color:#aaa">Bienvenue sur LogiStock</p>
         <input id="nom" placeholder="Nom d'utilisateur">
         <input id="mdp" type="password" placeholder="Mot de passe">
-        <br><button onclick="login()">Se connecter</button>
+        <br><button onclick="login()" style="width:100%;margin-top:10px">Se connecter →</button>
         <p id="msgLogin"></p>
         <p style="font-size:12px;color:gray">Entrez votre nom complet et votre code personnel.</p>
     </div>
@@ -66,15 +79,38 @@
             </div>
             <div class="contenu">
                 <div id="page-dashboard" class="page active">
-                    <h2>📊 Tableau de Bord</h2>
+                    <h2>📊 Tableau de Bord — Vue d'ensemble</h2>
                     <div class="total" id="blocTotalStock">Chargement...</div>
-                    <div style="display:flex;gap:10px;margin-top:10px">
-                        <div style="flex:1;background:#e3f2fd;padding:15px;border-radius:8px;text-align:center"><b id="nbVentes">-</b><br>🛒 Nombre de Ventes</div>
-                        <div id="blocCA" style="flex:1;background:#e8f5e9;padding:15px;border-radius:8px;text-align:center"><b id="caTotal">-</b><br>💰 Chiffre d'Affaires</div>
-                        <div style="flex:1;background:#fff3cd;padding:15px;border-radius:8px;text-align:center"><b id="nbAlertes">-</b><br>⚠️ Produits en Alerte</div>
+                    <div class="kpi-grid">
+                        <div class="kpi"><span>🛒 Nombre de Ventes</span><b id="nbVentes">-</b><small id="ventesAuj">- aujourd'hui</small></div>
+                        <div class="kpi" id="blocCA"><span>💰 Chiffre d'Affaires</span><b id="caTotal">-</b><small>Total des ventes</small></div>
+                        <div class="kpi" style="border-left-color:#ef4444"><span>⚠️ Produits en Alerte</span><b id="nbAlertes">-</b><small>Stock ≤ seuil</small></div>
+                        <div class="kpi" style="border-left-color:#22c55e"><span>📦 Produits en Stock</span><b id="nbProduits">-</b><small id="nbClientsDash">- clients</small></div>
+                    </div>
+                    <div class="dash-grid">
+                        <div class="dash-card">
+                            <h3>🏆 Top 5 Produits les Plus Vendus</h3>
+                            <div id="topProduits">Chargement...</div>
+                        </div>
+                        <div class="dash-card">
+                            <h3>🥇 Top Vendeurs</h3>
+                            <div id="topVendeurs">Chargement...</div>
+                            <hr style="border-color:#2a2a2a">
+                            <h3>📈 Ventes par Catégorie</h3>
+                            <div id="ventesCategorie">Chargement...</div>
+                        </div>
+                    </div>
+                    <div class="dash-grid">
+                        <div class="dash-card">
+                            <h3>🧾 Dernières Ventes</h3>
+                            <div id="dernieresVentes">Chargement...</div>
+                        </div>
+                        <div class="dash-card" style="border-color:#7f1d1d">
+                            <h3 style="color:#ff6b6b">⚠️ Alertes Stock - À Commander Vite</h3>
+                            <div id="alertesListe">Chargement...</div>
+                        </div>
                     </div>
                     <p id="msgConfidentiel" style="color:gray;margin-top:15px"></p>
-                    <p style="color:gray">👈 Utilise le menu à gauche pour naviguer.</p>
                 </div>
                 <div id="page-produits" class="page">
                     <div id="blocProduits">
@@ -87,260 +123,102 @@
                         <input id="seuil" type="number" placeholder="Seuil alerte ex: 5">
                         <select id="categorie"><option value="1">1 - Informatique & Ordinateurs</option><option value="2">2 - Périphériques</option><option value="3">3 - Réseau & Connectivité</option><option value="4">4 - Accessoires</option></select>
                         <br><button onclick="sauvegarder()" id="btnSave">Ajouter</button>
-                        <button onclick="annuler()" style="background:gray">Annuler</button>
+                        <button onclick="annuler()" style="background:#444;color:#fff">Annuler</button>
                     </div>
                     <h3>🔍 Recherche</h3>
                     <input id="recherche" class="search" placeholder="Tape HP, Souris..." onkeyup="charger()">
-                    <table>
-                        <thead><tr><th>Référence</th><th>Désignation</th><th>Prix</th><th>Stock</th><th>Catégorie</th><th>Action</th></tr></thead>
-                        <tbody id="liste"></tbody>
-                    </table>
+                    <table><thead><tr><th>Référence</th><th>Désignation</th><th>Prix</th><th>Stock</th><th>Catégorie</th><th>Action</th></tr></thead><tbody id="liste"></tbody></table>
                 </div>
                 <div id="page-ventes" class="page">
                     <div class="vente-box" id="blocVentes">
                         <h2>🛒 Faire une Vente</h2>
-                        <label>Produit :</label><br>
-                        <select id="venteProduit"></select><br>
-                        <label>Client :</label><br>
-                        <select id="venteClient"></select><br>
-                        <label>Quantité :</label><br>
-                        <input id="venteQuantite" type="number" value="1" min="1"><br>
-                        <button onclick="faireVente()" style="background:#22c55e;width:100%;padding:12px;font-weight:bold">✅ VALIDER LA VENTE</button>
+                        <label>Produit :</label><br><select id="venteProduit"></select><br>
+                        <label>Client :</label><br><select id="venteClient"></select><br>
+                        <label>Quantité :</label><br><input id="venteQuantite" type="number" value="1" min="1"><br>
+                        <button onclick="faireVente()" style="width:100%;padding:14px;font-weight:bold">✅ VALIDER LA VENTE</button>
                         <p id="msgVente"></p>
-                        <h3>📜 Historique des Ventes</h3>
-                        <div id="listeVentes"></div>
+                        <h3>📜 Historique des Ventes</h3><div id="listeVentes"></div>
                     </div>
                 </div>
                 <div id="page-clients" class="page">
-                    <div style="background:#f0fdf4;padding:20px;border-radius:10px;border:2px solid #22c55e">
+                    <div style="background:#1a1a1a;padding:20px;border-radius:12px;border:1px solid #d4af37">
                         <h2>👥 Gestion des Clients</h2>
                         <input id="newClientNom" placeholder="Nom nouveau client - Ex: Awa Diallo">
                         <input id="newClientTel" placeholder="Téléphone - Ex: 77 123 45 67">
-                        <button onclick="creerClient()" style="background:#059669;width:100%">➕ Enregistrer Nouveau Client</button>
-                        <p id="msgClient"></p>
-                        <h3>Liste des clients :</h3>
-                        <div id="listeClients"></div>
+                        <button onclick="creerClient()" style="width:100%">➕ Enregistrer Nouveau Client</button>
+                        <p id="msgClient"></p><h3>Liste des clients :</h3><div id="listeClients"></div>
                     </div>
                 </div>
                 <div id="page-utilisateurs" class="page">
-                    <div id="blocUtilisateurs" style="background:#eef2ff;padding:20px;border-radius:10px;border:2px solid #6366f1">
+                    <div id="blocUtilisateurs" style="background:#1a1a1a;padding:20px;border-radius:12px;border:1px solid #d4af37">
                         <h2>⚙️ Gestion des Utilisateurs</h2>
                         <input id="newNom" placeholder="Nom complet - Ex: Awa Diallo">
                         <input id="newMdp" type="password" placeholder="Mot de passe secret">
-                        <select id="newRole">
-                            <option value="3">Vendeur - Consulte le stock et vend</option>
-                            <option value="2">Gestionnaire Stock - Gère les produits</option>
-                            <option value="1">Administrateur - Gère tout le système</option>
-                        </select>
-                        <button onclick="creerUtilisateur()" style="background:#6366f1;width:100%">➕ Créer Utilisateur</button>
-                        <p id="msgUser"></p>
-                        <div id="listeUsers"></div>
+                        <select id="newRole"><option value="3">Vendeur - Consulte le stock et vend</option><option value="2">Gestionnaire Stock - Gère les produits</option><option value="1">Administrateur - Gère tout le système</option></select>
+                        <button onclick="creerUtilisateur()" style="width:100%">➕ Créer Utilisateur</button>
+                        <p id="msgUser"></p><div id="listeUsers"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+</div>
 <div id="recuImpression"></div>
 <script>
-    let tous = [];
-    let user = null;
-    let ventesGlobales = [];
-    function getRoleTexte(){
-        if(!user || !user.role) return "";
-        if(typeof user.role === 'object') return (user.role.libelle || "");
-        return user.role;
-    }
-    function allerPage(nom){
-        document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-        document.getElementById('page-'+nom).classList.add('active');
-        document.querySelectorAll('.sidebar button').forEach(b=>b.classList.remove('active'));
-        let btn = document.getElementById('menu'+nom.charAt(0).toUpperCase()+nom.slice(1));
-        if(btn) btn.classList.add('active');
-        if(nom==='produits') charger();
-        if(nom==='ventes') chargerVentes();
-        if(nom==='clients') chargerClients();
-        if(nom==='utilisateurs') chargerUsers();
-        if(nom==='dashboard') charger();
-    }
-    async function login() {
-        let r = await fetch('/api/auth/login', {method: 'POST',headers: {'Content-Type': 'application/json'},body: JSON.stringify({nom: document.getElementById('nom').value,motDePasse: document.getElementById('mdp').value})});
-        let data = await r.json();
-        if (data.success) {
-            user = data;
-            document.getElementById('loginBox').style.display = 'none';
-            document.getElementById('app').style.display = 'block';
-            document.getElementById('userInfo').innerHTML = '👤 ' + data.nom + '<br><span style="font-size:12px;color:#94a3b8">' + data.role + '</span>';
-            charger(); chargerVentes(); chargerUsers(); chargerClients();
-            appliquerDroits();
-            allerPage('dashboard');
-        } else {
-            document.getElementById('msgLogin').innerHTML = '<span style="color:red">' + data.message + '</span>';
-        }
-    }
-    function logout() { location.reload(); }
-    async function charger() {
-        let r = await fetch('/api/produits');
-        tous = await r.json();
-        let filtre = document.getElementById('recherche').value.toLowerCase();
-        let affiches = tous.filter(p => p.designation.toLowerCase().includes(filtre) || p.reference.toLowerCase().includes(filtre));
-        let total = 0;
-        tous.forEach(p => total += p.prix * p.stock);
-        let role = getRoleTexte().toLowerCase();
-        let peutModifier = !role.includes('vendeur');
-        document.getElementById('liste').innerHTML = affiches.map(p => {
-            let alerte = p.stock <= p.seuil ? '<span class="faible">⚠️ FAIBLE ! ' + p.stock + '</span>' : '<span class="ok">' + p.stock + '</span>';
-            let cat = p.categorie ? p.categorie.nom : '';
-            let actions = peutModifier ? `<button class="btn-edit" onclick="editer(${p.id})">✏️</button><button class="btn-del" onclick="supprimer(${p.id})">🗑️</button>` : `<span style="color:gray;font-size:12px">Consultation</span>`;
-            return `<tr><td>${p.reference}</td><td>${p.designation}</td><td>${p.prix} FCFA</td><td>${alerte}</td><td>${cat}</td><td>${actions}</td></tr>`;
-        }).join('');
-        let elTotal = document.getElementById('blocTotalStock');
-        if(elTotal) elTotal.innerHTML = '💰 Valeur totale du stock : ' + total + ' FCFA';
-        fetch('/api/ventes').then(r => r.json()).then(v => {
-            let ca = 0;
-            v.forEach(x => ca += Number(x.montantTotal || 0));
-            document.getElementById('nbVentes').innerText = v.length;
-            document.getElementById('caTotal').innerText = ca + ' FCFA';
+    let tous=[]; let user=null; let ventesGlobales=[];
+    function getRoleTexte(){ if(!user||!user.role) return ""; if(typeof user.role==='object') return (user.role.libelle||""); return user.role; }
+    function allerPage(nom){ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active')); document.getElementById('page-'+nom).classList.add('active'); document.querySelectorAll('.sidebar button').forEach(b=>b.classList.remove('active')); let btn=document.getElementById('menu'+nom.charAt(0).toUpperCase()+nom.slice(1)); if(btn) btn.classList.add('active'); if(nom==='produits') charger(); if(nom==='ventes') chargerVentes(); if(nom==='clients') chargerClients(); if(nom==='utilisateurs') chargerUsers(); if(nom==='dashboard') charger(); }
+    async function login(){ let r=await fetch('/api/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({nom:document.getElementById('nom').value,motDePasse:document.getElementById('mdp').value})}); let data=await r.json(); if(data.success){ user=data; document.getElementById('loginBox').style.display='none'; document.getElementById('app').style.display='block'; document.getElementById('userInfo').innerHTML='👤 '+data.nom+'<br><span style="font-size:12px;color:#d4af37">'+data.role+'</span>'; charger(); chargerVentes(); chargerUsers(); chargerClients(); appliquerDroits(); allerPage('dashboard'); } else { document.getElementById('msgLogin').innerHTML='<span style="color:red">'+data.message+'</span>'; } }
+    function logout(){ location.reload(); }
+    async function charger(){
+        let r=await fetch('/api/produits'); tous=await r.json();
+        let filtre=document.getElementById('recherche').value.toLowerCase();
+        let affiches=tous.filter(p=>p.designation.toLowerCase().includes(filtre)||p.reference.toLowerCase().includes(filtre));
+        let total=0; tous.forEach(p=>total+=p.prix*p.stock);
+        let role=getRoleTexte().toLowerCase(); let peutModifier=!role.includes('vendeur');
+        document.getElementById('liste').innerHTML=affiches.map(p=>{ let alerte=p.stock<=p.seuil?'<span class="faible">⚠️ FAIBLE ! '+p.stock+'</span>':'<span class="ok">'+p.stock+'</span>'; let cat=p.categorie?p.categorie.nom:''; let actions=peutModifier?`<button class="btn-edit" onclick="editer(${p.id})">✏️</button><button class="btn-del" onclick="supprimer(${p.id})">🗑️</button>`:`<span style="color:gray;font-size:12px">Consultation</span>`; return `<tr><td>${p.reference}</td><td>${p.designation}</td><td>${p.prix} FCFA</td><td>${alerte}</td><td>${cat}</td><td>${actions}</td></tr>`; }).join('');
+        let elTotal=document.getElementById('blocTotalStock'); if(elTotal) elTotal.innerHTML='💰 Valeur totale du stock : '+total.toLocaleString()+' FCFA  •  '+tous.length+' produits';
+        document.getElementById('nbProduits').innerText=tous.length;
+        let alertesList=tous.filter(p=>p.stock<=p.seuil);
+        document.getElementById('nbAlertes').innerText=alertesList.length;
+        document.getElementById('alertesListe').innerHTML=alertesList.length?alertesList.map(p=>`<div class="vente-item"><span>⚠️ ${p.designation}</span><b style="color:#ff6b6b">Stock: ${p.stock} / Seuil: ${p.seuil}</b></div>`).join(''):'<p style="color:#4ade80">✅ Aucune alerte, tout va bien !</p>';
+        try{ let clients=await (await fetch('/api/clients')).json(); document.getElementById('nbClientsDash').innerText=clients.length+' clients'; }catch(e){}
+        fetch('/api/ventes').then(r=>r.json()).then(v=>{
+            let ca=0; v.forEach(x=>ca+=Number(x.montantTotal||0));
+            document.getElementById('nbVentes').innerText=v.length;
+            document.getElementById('caTotal').innerText=ca.toLocaleString()+' FCFA';
+            let auj=new Date().toISOString().slice(0,10); let ventesAuj=v.filter(x=>(x.dateVente||'').startsWith(auj)).length;
+            document.getElementById('ventesAuj').innerText=ventesAuj+' aujourd\'hui';
+            // TOP PRODUITS
+            let map={}; v.forEach(x=>{ let nom=x.produit?x.produit.designation:'Produit'; map[nom]=(map[nom]||0)+Number(x.quantite||0); });
+            let top=Object.entries(map).sort((a,b)=>b[1]-a[1]).slice(0,5); let max=top.length?top[0][1]:1;
+            document.getElementById('topProduits').innerHTML=top.length?top.map(([nom,q],i)=>`<div class="bar-row"><span>${i+1}. ${nom}</span><div class="bar"><i style="width:${(q/max*100)}%"></i></div><b class="badge">${q} vendus</b></div>`).join(''):'<p>Aucune vente pour le moment</p>';
+            // TOP VENDEURS
+            let mapV={}; v.forEach(x=>{ let nom=x.utilisateur?x.utilisateur.nom:(x.vendeur||'Vendeur'); mapV[nom]=(mapV[nom]||0)+Number(x.montantTotal||0); });
+            let topV=Object.entries(mapV).sort((a,b)=>b[1]-a[1]).slice(0,3);
+            document.getElementById('topVendeurs').innerHTML=topV.length?topV.map(([nom,m],i)=>`<div class="vente-item"><span>${i==0?'🥇':i==1?'🥈':'🥉'} ${nom}</span><b style="color:#d4af37">${Number(m).toLocaleString()} FCFA</b></div>`).join(''):'<p>Aucun vendeur</p>';
+            // PAR CATEGORIE
+            let mapC={}; v.forEach(x=>{ let c=x.produit&&x.produit.categorie?x.produit.categorie.nom:'Divers'; mapC[c]=(mapC[c]||0)+1; });
+            document.getElementById('ventesCategorie').innerHTML=Object.entries(mapC).map(([c,n])=>`<div class="bar-row"><span>${c}</span><div class="bar"><i style="width:${n/v.length*100}%"></i></div><b>${n}</b></div>`).join('')||'Aucune donnée';
+            // DERNIERES VENTES
+            let dernieres=[...v].slice(-5).reverse();
+            document.getElementById('dernieresVentes').innerHTML=dernieres.length?dernieres.map(x=>`<div class="vente-item"><span>🧾 ${x.produit?x.produit.designation:'?'} x ${x.quantite}</span><b>${x.montantTotal} FCFA</b></div>`).join(''):'<p>Aucune vente</p>';
         });
-        let alertes = tous.filter(p => p.stock <= p.seuil).length;
-        document.getElementById('nbAlertes').innerText = alertes;
     }
-    async function sauvegarder() {
-        let id = document.getElementById('idProduit').value;
-        let produit = {reference: document.getElementById('reference').value,designation: document.getElementById('designation').value,prix: parseFloat(document.getElementById('prix').value),stock: parseInt(document.getElementById('stock').value),seuil: parseInt(document.getElementById('seuil').value),categorie: {id: parseInt(document.getElementById('categorie').value)}};
-        if (id) { await fetch('/api/produits/' + id, {method: 'PUT',headers: {'Content-Type': 'application/json'},body: JSON.stringify(produit)}); }
-        else { await fetch('/api/produits', {method: 'POST',headers: {'Content-Type': 'application/json'},body: JSON.stringify(produit)}); }
-        annuler(); charger(); chargerVentes();
-    }
-    function editer(id) {
-        let p = tous.find(x => x.id == id);
-        allerPage('produits');
-        document.getElementById('idProduit').value = p.id;
-        document.getElementById('reference').value = p.reference;
-        document.getElementById('designation').value = p.designation;
-        document.getElementById('prix').value = p.prix;
-        document.getElementById('stock').value = p.stock;
-        document.getElementById('seuil').value = p.seuil;
-        if (p.categorie) document.getElementById('categorie').value = p.categorie.id;
-        document.getElementById('btnSave').innerHTML = '💾 Enregistrer modification';
-    }
-    function annuler() {
-        document.getElementById('idProduit').value = '';
-        document.getElementById('reference').value = '';
-        document.getElementById('designation').value = '';
-        document.getElementById('prix').value = '';
-        document.getElementById('stock').value = '';
-        document.getElementById('seuil').value = '';
-        document.getElementById('btnSave').innerHTML = 'Ajouter';
-    }
-    async function supprimer(id) { if (confirm('Supprimer ce produit ?')) { await fetch('/api/produits/' + id, {method: 'DELETE'}); charger(); } }
-    async function chargerClients(){
-        try{
-            let clients = await (await fetch('/api/clients')).json();
-            document.getElementById('venteClient').innerHTML = clients.length ? clients.map(c => `<option value="${c.id}">${c.nom} - ${c.telephone || ''}</option>`).join('') : '<option value="">Aucun client - crée en un</option>';
-            document.getElementById('listeClients').innerHTML = clients.length ? clients.map(c => `<p>👤 ${c.nom} - ${c.telephone || ''} - ${c.adresse || ''}</p>`).join('') : '<p>Aucun client</p>';
-        }catch(e){}
-    }
-    async function creerClient(){
-        let nom = document.getElementById('newClientNom').value;
-        let tel = document.getElementById('newClientTel').value;
-        if(!nom){ alert('Mets le nom du client'); return; }
-        let r = await fetch('/api/clients',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({nom:nom, telephone:tel})});
-        if(r.ok){ document.getElementById('msgClient').innerHTML='<span style="color:green">✅ Client enregistré !</span>'; document.getElementById('newClientNom').value=''; document.getElementById('newClientTel').value=''; chargerClients(); }
-        else { document.getElementById('msgClient').innerHTML='❌ Erreur création client'; }
-    }
-    async function chargerVentes() {
-        let prods = await (await fetch('/api/produits')).json();
-        document.getElementById('venteProduit').innerHTML = prods.map(p => `<option value="${p.id}">${p.designation} - ${p.prix} FCFA (Stock: ${p.stock})</option>`).join('');
-        await chargerClients();
-        let ventes = await (await fetch('/api/ventes')).json();
-        ventesGlobales = ventes;
-        document.getElementById('listeVentes').innerHTML = ventes.length ? ventes.map((v,i) => `<p>🧾 ${v.numero} - ${v.produit ? v.produit.designation : '?'} x ${v.quantite} = ${v.montantTotal} FCFA - Client: ${v.client ? v.client.nom : '?'} - ${v.dateVente ? v.dateVente.substring(0, 16).replace('T', ' ') : ''} <button class="btn-print" onclick="imprimerRecu(${i})">🖨️ Imprimer Reçu</button></p>`).join('') : '<p>Aucune vente pour le moment</p>';
-    }
-    async function faireVente() {
-        let idUser = (user && (user.idUtilisateur || user.id)) ? (user.idUtilisateur || user.id) : 1;
-        let res = await fetch('/api/ventes', {method: 'POST',headers: {'Content-Type': 'application/json'},body: JSON.stringify({idProduit: document.getElementById('venteProduit').value,idClient: document.getElementById('venteClient').value,quantite: document.getElementById('venteQuantite').value,idUtilisateur: idUser})});
-        if (res.ok) {
-            document.getElementById('msgVente').innerHTML = '<span style="color:green">✅ Vente réussie ! Stock diminué !</span>';
-            charger(); chargerVentes();
-            if(confirm('Vente réussie ! Voulez-vous imprimer le reçu ?')){ setTimeout(()=>{ imprimerRecu(ventesGlobales.length-1); }, 800); }
-        }
-        else { let t = await res.text(); document.getElementById('msgVente').innerHTML = '❌ Erreur: ' + t; }
-    }
-    function imprimerRecu(index){
-        let v = ventesGlobales[index];
-        if(!v){ alert('Vente introuvable'); return; }
-        let prixUnit = v.produit ? v.produit.prix : (v.montantTotal / v.quantite);
-        let date = v.dateVente ? v.dateVente.substring(0,16).replace('T',' à ') : new Date().toLocaleString('fr-FR');
-        document.getElementById('recuImpression').innerHTML = `
-            <div style="max-width:400px;margin:auto;border:1px solid #000;padding:20px;text-align:center">
-                <h2 style="margin:0">📦 LogiStock - Bamako</h2>
-                <p style="margin:5px 0">Bamako, Mali</p><hr>
-                <h3>REÇU DE VENTE</h3>
-                <p><b>N° Vente :</b> ${v.numero || v.id}</p>
-                <p><b>Date :</b> ${date}</p>
-                <p><b>Vendeur :</b> ${user ? user.nom : ''}</p>
-                <p><b>Client :</b> ${v.client ? v.client.nom : 'Client divers'}</p><hr>
-                <table style="width:100%;text-align:left"><tr><th>Produit</th><th>Qté</th><th>Prix</th><th>Total</th></tr>
-                <tr><td>${v.produit ? v.produit.designation : '?'}</td><td>${v.quantite}</td><td>${prixUnit} FCFA</td><td>${v.montantTotal} FCFA</td></tr></table><hr>
-                <h3>TOTAL À PAYER : ${v.montantTotal} FCFA</h3>
-                <p>Merci de votre confiance !</p>
-                <p style="font-size:12px">LogiStock - Bamako</p>
-                <p>Signature : _______________</p>
-            </div>`;
-        window.print();
-    }
-    async function creerUtilisateur(){
-        let nom = document.getElementById('newNom').value;
-        let mdp = document.getElementById('newMdp').value;
-        let roleVal = document.getElementById('newRole').value;
-        if(!nom || !mdp){ alert('Remplis nom et mot de passe'); return; }
-        let r = await fetch('/api/utilisateurs',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({nom:nom, motDePasse:mdp, role:{id: parseInt(roleVal)}})});
-        if(r.ok){ document.getElementById('msgUser').innerHTML='<span style="color:green">✅ Utilisateur créé !</span>'; document.getElementById('newNom').value=''; document.getElementById('newMdp').value=''; chargerUsers(); }
-        else { let t = await r.text(); document.getElementById('msgUser').innerHTML='❌ Erreur: '+t; }
-    }
-    async function chargerUsers(){
-        try{
-            let users = await (await fetch('/api/utilisateurs')).json();
-            document.getElementById('listeUsers').innerHTML = users.map(u=>{
-                let nomRole = u.role ? (u.role.libelle || 'Role') : '?';
-                return `<p>👤 ${u.nom} - ${nomRole} <button onclick="supprimerUser(${u.id})" style="background:red;padding:4px 8px">Supprimer</button></p>`;
-            }).join('');
-        }catch(e){}
-    }
-    async function supprimerUser(id){
-        if(confirm('Supprimer cet utilisateur ?')){ await fetch('/api/utilisateurs/'+id,{method:'DELETE'}); chargerUsers(); }
-    }
-    function appliquerDroits(){
-        let role = getRoleTexte().toLowerCase();
-        let menuProduits = document.getElementById('menuProduits');
-        let menuVentes = document.getElementById('menuVentes');
-        let menuClients = document.getElementById('menuClients');
-        let menuUtilisateurs = document.getElementById('menuUtilisateurs');
-        let blocProduits = document.getElementById('blocProduits');
-        let blocCA = document.getElementById('blocCA');
-        let blocTotalStock = document.getElementById('blocTotalStock');
-        let msgConfidentiel = document.getElementById('msgConfidentiel');
-        [menuProduits,menuVentes,menuClients,menuUtilisateurs].forEach(m=>{ if(m) m.style.display='block'; });
-        if(blocProduits) blocProduits.style.display='block';
-        if(blocCA) blocCA.style.display='block';
-        if(blocTotalStock) blocTotalStock.style.display='block';
-        if(msgConfidentiel) msgConfidentiel.innerHTML='';
-        if(role.includes('vendeur')){
-            if(menuProduits) menuProduits.style.display='none';
-            if(menuUtilisateurs) menuUtilisateurs.style.display='none';
-            if(blocProduits) blocProduits.style.display='none';
-            if(blocCA) blocCA.style.display='none';
-            if(blocTotalStock) blocTotalStock.style.display='none';
-            if(msgConfidentiel) msgConfidentiel.innerHTML='🔒 Les chiffres d\'affaires sont confidentiels, réservés à l\'Administrateur.';
-        }
-        else if(role.includes('gestionnaire')){
-            if(menuUtilisateurs) menuUtilisateurs.style.display='none';
-            if(blocCA) blocCA.style.display='none';
-            if(blocTotalStock) blocTotalStock.style.display='none';
-            if(msgConfidentiel) msgConfidentiel.innerHTML='🔒 Les chiffres d\'affaires sont confidentiels, réservés à l\'Administrateur.';
-        }
-    }
+    async function sauvegarder(){ let id=document.getElementById('idProduit').value; let produit={reference:document.getElementById('reference').value,designation:document.getElementById('designation').value,prix:parseFloat(document.getElementById('prix').value),stock:parseInt(document.getElementById('stock').value),seuil:parseInt(document.getElementById('seuil').value),categorie:{id:parseInt(document.getElementById('categorie').value)}}; if(id){ await fetch('/api/produits/'+id,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(produit)}); } else { await fetch('/api/produits',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(produit)}); } annuler(); charger(); chargerVentes(); }
+    function editer(id){ let p=tous.find(x=>x.id==id); allerPage('produits'); document.getElementById('idProduit').value=p.id; document.getElementById('reference').value=p.reference; document.getElementById('designation').value=p.designation; document.getElementById('prix').value=p.prix; document.getElementById('stock').value=p.stock; document.getElementById('seuil').value=p.seuil; if(p.categorie) document.getElementById('categorie').value=p.categorie.id; document.getElementById('btnSave').innerHTML='💾 Enregistrer modification'; }
+    function annuler(){ document.getElementById('idProduit').value=''; document.getElementById('reference').value=''; document.getElementById('designation').value=''; document.getElementById('prix').value=''; document.getElementById('stock').value=''; document.getElementById('seuil').value=''; document.getElementById('btnSave').innerHTML='Ajouter'; }
+    async function supprimer(id){ if(confirm('Supprimer ce produit ?')){ await fetch('/api/produits/'+id,{method:'DELETE'}); charger(); } }
+    async function chargerClients(){ try{ let clients=await (await fetch('/api/clients')).json(); document.getElementById('venteClient').innerHTML=clients.length?clients.map(c=>`<option value="${c.id}">${c.nom} - ${c.telephone||''}</option>`).join(''):'<option value="">Aucun client - crée en un</option>'; document.getElementById('listeClients').innerHTML=clients.length?clients.map(c=>`<p>👤 ${c.nom} - ${c.telephone||''} - ${c.adresse||''}</p>`).join(''):'<p>Aucun client</p>'; }catch(e){} }
+    async function creerClient(){ let nom=document.getElementById('newClientNom').value; let tel=document.getElementById('newClientTel').value; if(!nom){ alert('Mets le nom du client'); return; } let r=await fetch('/api/clients',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({nom:nom,telephone:tel})}); if(r.ok){ document.getElementById('msgClient').innerHTML='<span style="color:green">✅ Client enregistré !</span>'; document.getElementById('newClientNom').value=''; document.getElementById('newClientTel').value=''; chargerClients(); } else { document.getElementById('msgClient').innerHTML='❌ Erreur création client'; } }
+    async function chargerVentes(){ let prods=await (await fetch('/api/produits')).json(); document.getElementById('venteProduit').innerHTML=prods.map(p=>`<option value="${p.id}">${p.designation} - ${p.prix} FCFA (Stock: ${p.stock})</option>`).join(''); await chargerClients(); let ventes=await (await fetch('/api/ventes')).json(); ventesGlobales=ventes; document.getElementById('listeVentes').innerHTML=ventes.length?ventes.map((v,i)=>`<p>🧾 ${v.numero} - ${v.produit?v.produit.designation:'?'} x ${v.quantite} = ${v.montantTotal} FCFA - Client: ${v.client?v.client.nom:'?'} - ${v.dateVente?v.dateVente.substring(0,16).replace('T',' '):''} <button class="btn-print" onclick="imprimerRecu(${i})">🖨️ Imprimer Reçu</button></p>`).join(''):'<p>Aucune vente pour le moment</p>'; }
+    async function faireVente(){ let idUser=(user&&(user.idUtilisateur||user.id))?(user.idUtilisateur||user.id):1; let res=await fetch('/api/ventes',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({idProduit:document.getElementById('venteProduit').value,idClient:document.getElementById('venteClient').value,quantite:document.getElementById('venteQuantite').value,idUtilisateur:idUser})}); if(res.ok){ document.getElementById('msgVente').innerHTML='<span style="color:green">✅ Vente réussie ! Stock diminué !</span>'; charger(); chargerVentes(); if(confirm('Vente réussie ! Voulez-vous imprimer le reçu ?')){ setTimeout(()=>{ imprimerRecu(ventesGlobales.length-1); },800); } } else { let t=await res.text(); document.getElementById('msgVente').innerHTML='❌ Erreur: '+t; } }
+    function imprimerRecu(index){ let v=ventesGlobales[index]; if(!v){ alert('Vente introuvable'); return; } let prixUnit=v.produit?v.produit.prix:(v.montantTotal/v.quantite); let date=v.dateVente?v.dateVente.substring(0,16).replace('T',' à '):new Date().toLocaleString('fr-FR'); document.getElementById('recuImpression').innerHTML=`<div style="max-width:400px;margin:auto;border:1px solid #000;padding:20px;text-align:center"><h2 style="margin:0;color:#000">📦 LogiStock - Bamako</h2><p style="margin:5px 0">Bamako, Mali</p><hr><h3>REÇU DE VENTE</h3><p><b>N° Vente :</b> ${v.numero||v.id}</p><p><b>Date :</b> ${date}</p><p><b>Vendeur :</b> ${user?user.nom:''}</p><p><b>Client :</b> ${v.client?v.client.nom:'Client divers'}</p><hr><table style="width:100%;text-align:left;color:#000"><tr><th>Produit</th><th>Qté</th><th>Prix</th><th>Total</th></tr><tr><td>${v.produit?v.produit.designation:'?'}</td><td>${v.quantite}</td><td>${prixUnit} FCFA</td><td>${v.montantTotal} FCFA</td></tr></table><hr><h3>TOTAL À PAYER : ${v.montantTotal} FCFA</h3><p>Merci de votre confiance !</p><p style="font-size:12px">LogiStock - Bamako</p><p>Signature : _______________</p></div>`; window.print(); }
+    async function creerUtilisateur(){ let nom=document.getElementById('newNom').value; let mdp=document.getElementById('newMdp').value; let roleVal=document.getElementById('newRole').value; if(!nom||!mdp){ alert('Remplis nom et mot de passe'); return; } let r=await fetch('/api/utilisateurs',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({nom:nom,motDePasse:mdp,role:{id:parseInt(roleVal)}})}); if(r.ok){ document.getElementById('msgUser').innerHTML='<span style="color:green">✅ Utilisateur créé !</span>'; document.getElementById('newNom').value=''; document.getElementById('newMdp').value=''; chargerUsers(); } else { let t=await r.text(); document.getElementById('msgUser').innerHTML='❌ Erreur: '+t; } }
+    async function chargerUsers(){ try{ let users=await (await fetch('/api/utilisateurs')).json(); document.getElementById('listeUsers').innerHTML=users.map(u=>{ let nomRole=u.role?(u.role.libelle||'Role'):'?'; return `<p>👤 ${u.nom} - ${nomRole} <button onclick="supprimerUser(${u.id})" style="background:red;padding:4px 8px">Supprimer</button></p>`; }).join(''); }catch(e){} }
+    async function supprimerUser(id){ if(confirm('Supprimer cet utilisateur ?')){ await fetch('/api/utilisateurs/'+id,{method:'DELETE'}); chargerUsers(); } }
+    function appliquerDroits(){ let role=getRoleTexte().toLowerCase(); let menuProduits=document.getElementById('menuProduits'); let menuVentes=document.getElementById('menuVentes'); let menuClients=document.getElementById('menuClients'); let menuUtilisateurs=document.getElementById('menuUtilisateurs'); let blocProduits=document.getElementById('blocProduits'); let blocCA=document.getElementById('blocCA'); let blocTotalStock=document.getElementById('blocTotalStock'); let msgConfidentiel=document.getElementById('msgConfidentiel'); [menuProduits,menuVentes,menuClients,menuUtilisateurs].forEach(m=>{ if(m) m.style.display='block'; }); if(blocProduits) blocProduits.style.display='block'; if(blocCA) blocCA.style.display='block'; if(blocTotalStock) blocTotalStock.style.display='block'; if(msgConfidentiel) msgConfidentiel.innerHTML=''; if(role.includes('vendeur')){ if(menuProduits) menuProduits.style.display='none'; if(menuUtilisateurs) menuUtilisateurs.style.display='none'; if(blocProduits) blocProduits.style.display='none'; if(blocCA) blocCA.style.display='none'; if(blocTotalStock) blocTotalStock.style.display='none'; if(msgConfidentiel) msgConfidentiel.innerHTML='🔒 Les chiffres d\'affaires sont confidentiels, réservés à l\'Administrateur.'; } else if(role.includes('gestionnaire')){ if(menuUtilisateurs) menuUtilisateurs.style.display='none'; if(blocCA) blocCA.style.display='none'; if(blocTotalStock) blocTotalStock.style.display='none'; if(msgConfidentiel) msgConfidentiel.innerHTML='🔒 Les chiffres d\'affaires sont confidentiels, réservés à l\'Administrateur.'; } }
 </script>
 </body>
 </html>
